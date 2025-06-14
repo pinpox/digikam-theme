@@ -101,7 +101,7 @@
                         </xsl:otherwise>
                     </xsl:choose>
                 </div>
-                <img src="{full/@fileName}" width="{full/@width}" height="{full/@height}" />
+                <img src="{full/@fileName}" style="width:100% !important; max-width:none !important; height:auto !important; max-height:60vh !important; object-fit:cover !important; display:block !important;" />
                 <div class="nav-arrow right-arrow">
                     <xsl:choose>
                         <xsl:when test="position() &lt; last()">
