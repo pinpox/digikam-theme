@@ -53,32 +53,24 @@
     <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
         <title><xsl:value-of select="../name"/> (<xsl:value-of select="position()"/>/<xsl:value-of select="last()"/>)</title>
 
         <link rel="stylesheet" type="text/css" href="../pinpox/style.css"/>
 	<xsl:call-template name="linkTagsImagePage"/>
         <script type="text/javascript">
-            document.addEventListener('keydown', function(event) {
-                if (event.key === 'ArrowLeft') {
-                    <xsl:if test="position() &gt; 1">
-                    var prevUrl = '<xsl:value-of select="preceding-sibling::image[position()=1]/full/@fileName"/>.html';
-                    window.location.href = prevUrl;
-                    </xsl:if>
-                }
-                else if (event.key === 'ArrowRight') {
-                    <xsl:if test="position() &lt; last()">
-                    var nextUrl = '<xsl:value-of select="following-sibling::image[position()=1]/full/@fileName"/>.html';
-                    window.location.href = nextUrl;
-                    </xsl:if>
-                }
-            });
+            // Define navigation URLs for the script to use
+            window.navigationData = {
+                prevUrl: '<xsl:if test="position() &gt; 1"><xsl:value-of select="preceding-sibling::image[position()=1]/full/@fileName"/>.html</xsl:if>',
+                nextUrl: '<xsl:if test="position() &lt; last()"><xsl:value-of select="following-sibling::image[position()=1]/full/@fileName"/>.html</xsl:if>'
+            };
         </script>
+        <script type="text/javascript" src="../pinpox/touch.js?v=1"></script>
     </head>
     <body id="imagePage">
 
         <h1>
-            <a href="/albums">albums</a>
+            <a href="/albums">Albums</a>
             /
             <xsl:choose>
                 <xsl:when test="count(/collections/collection) &gt; 1">
@@ -139,8 +131,6 @@
             </div>
         </div>
         </xsl:if>
-            
-            
         <details class="metadata-details">
                 <summary>Image Metadata</summary>
                 <table class="metadata-table">
@@ -179,7 +169,10 @@
         <title><xsl:value-of select="name"/></title>
 
         <link rel="stylesheet" type="text/css" href="pinpox/style.css"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta name="mobile-web-app-capable" content="yes"/>
 	<xsl:call-template name="linkTagsCollectionPage"/>
+        <script type="text/javascript" src="pinpox/touch.js?v=1"></script>
     </head>
     <body id="collectionPage">
     <h1>
@@ -206,7 +199,7 @@
                     <xsl:call-template name="imagePage"/>
                 </exsl:document>
             </xsl:for-each>
-    </div> <!-- /content -->
+    </div>
     </body>
     </html>
 </xsl:template>
