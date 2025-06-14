@@ -1,0 +1,327 @@
+body {
+    background-color: #223344;
+    background-image: url("https://trisquel.info/files/awesome_bg_0.png");
+    color: white;
+    margin: 0;
+    font-family: monospace;
+    font-size: 12pt;
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-attachment: fixed;
+    cursor: default;
+}
+
+a {
+    color: #ff9966;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #ffcc99;
+}
+
+img {
+    border: 0px solid black;
+}
+
+h1 {
+    margin: 0;
+    padding-left: 1.5em;
+    padding-top: 0.5em;
+    padding-bottom: 0.4em;
+    font-size: 110%;
+    background-color: #334455;
+    color: white;
+    font-weight: normal;
+    font-family: monospace;
+    letter-spacing: 0.5px;
+    border-left: 2px solid #aaddff;
+    border-top: 2px solid #aaddff;
+    border-right: 2px solid #112233;
+    border-bottom: 2px solid #112233;
+    border-radius: 0;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+    position: relative;
+}
+
+
+h1 a {
+    color: #88ccff;
+}
+h1 a:hover {
+    color: #ffffff;
+}
+
+.thumbnail {
+    display: inline;
+    float: left;
+    width: 180px;
+    height: 200px;
+    margin: 1em;
+    text-align: left;
+    font-family: monospace;
+}
+.thumbnail img {
+    display: block;
+    border: 1px solid #333333;
+}
+
+
+
+#navigation {
+    width: 100%;
+    text-align: center;
+}
+
+#content {
+    clear: both;
+    overflow: auto;
+    margin-top: 1em;
+    margin-left: 4em;
+    margin-right: 4em;
+}
+#content img {
+    border: 1px solid #222222;
+    max-width: 100%;
+    height: auto;
+}
+
+#collectionPage img {
+    display: block;
+}
+
+.image-container {
+    position: relative;
+    margin-bottom: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 28px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    color: #000000;
+    cursor: pointer;
+    z-index: 10;
+    background-color: #6688aa;
+    border-radius: 0;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-left: 2px solid #aaddff;
+    border-top: 2px solid #aaddff;
+    border-right: 2px solid #112233;
+    border-bottom: 2px solid #112233;
+    font-family: monospace;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+}
+
+.image-container:hover .nav-arrow {
+    opacity: 1;
+}
+
+.left-arrow {
+    left: 15px;
+}
+
+.right-arrow {
+    right: 15px;
+}
+
+.nav-arrow a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    line-height: 36px;
+}
+
+.nav-arrow .disabled {
+    color: rgba(255, 255, 255, 0.4);
+    cursor: default;
+}
+
+.back-link {
+    display: none;
+}
+
+#imagePage #content {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 0;
+    overflow: visible;
+    position: relative;
+    padding: 0 0 0 15px;
+    display: flex;
+    height: calc(100vh - 80px);
+    justify-content: space-between;
+}
+
+div.colsx {
+    text-align: center;
+    width: calc(100% - 320px); 
+    position: relative;
+    margin-top: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    padding-right: 10px;
+}
+
+div.colsx img {
+    max-width: 100%;
+    max-height: calc(100vh - 200px);
+    object-fit: contain;
+    height: auto;
+    width: auto;
+    margin: 0 auto;
+    display: block;
+    border-left: 2px solid #aaddff;
+    border-top: 2px solid #aaddff;
+    border-right: 2px solid #112233;
+    border-bottom: 2px solid #112233;
+    border-radius: 0;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+}
+
+.image-caption {
+    font-size: 14px;
+    line-height: 1.5;
+    width: 300px;
+    margin: 0 0 40px 0;
+    text-align: left;
+    color: #ffffff;
+    z-index: 20;
+    position: static;
+    align-self: flex-end;
+    font-family: monospace;
+    font-weight: 300;
+    border-left: 2px solid #aaddff;
+    border-top: 2px solid #aaddff;
+    border-right: 2px solid #112233;
+    border-bottom: 2px solid #112233;
+    background-color: #334455;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+    padding: 0;
+    overflow: hidden;
+}
+
+.image-caption p {
+    margin: 0;
+    padding: 6px 10px;
+}
+
+.image-caption .caption-content {
+    border-left: 1px solid #aaddff;
+    border-top: 1px solid #aaddff;
+    border-right: 1px solid #112233;
+    border-bottom: 1px solid #112233;
+    margin: 1px;
+    background-color: #334455;
+}
+
+.image-caption p:last-child {
+    margin-bottom: 0;
+}
+
+.title-bar {
+    display: block;
+    background-color: #6688aa;
+    color: #000000;
+    font-weight: bold;
+    padding: 3px 10px;
+    text-align: left;
+    font-family: monospace;
+    border-bottom: 1px solid #000000;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    position: relative;
+    border-left: 1px solid #aaddff;
+    border-top: 1px solid #aaddff;
+    border-right: 1px solid #112233;
+    border-bottom: 1px solid #112233;
+}
+
+.metadata-details {
+    margin: 10px 0 0 0;
+    display: none;
+    width: 300px;
+    position: static;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+    border-left: 2px solid #aaddff;
+    border-top: 2px solid #aaddff;
+    border-right: 2px solid #112233;
+    border-bottom: 2px solid #112233;
+}
+
+.sidebar {
+    width: 320px;
+    padding-right: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+    overflow-y: auto;
+}
+
+.metadata-details summary {
+    padding: 0.6em;
+    background-color: #555555;
+    border: 1px solid #666666;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    text-align: right;
+    font-size: 14px;
+    color: white;
+    font-family: monospace;
+}
+
+.metadata-details summary:hover {
+    background-color: #666666;
+}
+
+.metadata-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0.5em;
+    font-size: 13px;
+    background-color: #444444;
+    border: 1px solid #555555;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    color: white;
+    font-family: monospace;
+}
+
+.metadata-table th, 
+.metadata-table td {
+    padding: 6px 10px;
+    text-align: left;
+    border-bottom: 1px solid #555555;
+}
+
+.metadata-table th {
+    width: 40%;
+    font-weight: bold;
+    background-color: #555555;
+}
+
+.metadata-table tr:nth-child(even) {
+    background-color: #4a4a4a;
+}
+
+.metadata-table tr:hover {
+    background-color: #505050;
+}
