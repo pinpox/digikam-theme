@@ -263,7 +263,7 @@ h1 a:hover {
     opacity: 1;
     color: #000000;
     cursor: pointer;
-    z-index: 100;
+    z-index: 1000;
     background-color: #6688aa;
     border-radius: 0;
     width: 36px;
@@ -291,7 +291,7 @@ h1 a:hover {
 }
 
 @media (max-width: 768px) {
-    .nav-arrow {
+    .nav-arrow, .left-arrow, .right-arrow {
         display: none !important;
         visibility: hidden !important;
     }
@@ -327,15 +327,21 @@ h1 a:hover {
 }
 
 @media (min-width: 769px) {
+    .nav-arrow {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+    
     .left-arrow {
-        left: -50px !important;
+        left: 20px !important;
         display: flex !important;
         visibility: visible !important;
         opacity: 1 !important;
     }
     
     .right-arrow {
-        right: -50px !important;
+        right: 20px !important;
         display: flex !important;
         visibility: visible !important;
         opacity: 1 !important;

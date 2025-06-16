@@ -73,29 +73,29 @@
 
 
     <div id="content">
+        <div class="nav-arrow left-arrow">
+            <xsl:choose>
+                <xsl:when test="position() &gt; 1">
+                    <a href="{preceding-sibling::image[position()=1]/full/@fileName}.html">&#9664;</a>
+                </xsl:when>
+                <xsl:otherwise>
+                    <span class="disabled">&#9664;</span>
+                </xsl:otherwise>
+            </xsl:choose>
+        </div>
+        <div class="nav-arrow right-arrow">
+            <xsl:choose>
+                <xsl:when test="position() &lt; last()">
+                    <a href="{following-sibling::image[position()=1]/full/@fileName}.html">&#9654;</a>
+                </xsl:when>
+                <xsl:otherwise>
+                    <span class="disabled">&#9654;</span>
+                </xsl:otherwise>
+            </xsl:choose>
+        </div>
         <div class="colsx">
             <div class="image-container">
-                <div class="nav-arrow left-arrow">
-                    <xsl:choose>
-                        <xsl:when test="position() &gt; 1">
-                            <a href="{preceding-sibling::image[position()=1]/full/@fileName}.html">&#9664;</a>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <span class="disabled">&#9664;</span>
-                        </xsl:otherwise>
-                    </xsl:choose>
-                </div>
                 <img src="{full/@fileName}" />
-                <div class="nav-arrow right-arrow">
-                    <xsl:choose>
-                        <xsl:when test="position() &lt; last()">
-                            <a href="{following-sibling::image[position()=1]/full/@fileName}.html">&#9654;</a>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <span class="disabled">&#9654;</span>
-                        </xsl:otherwise>
-                    </xsl:choose>
-                </div>
             </div>
             <xsl:if test="original/@fileName != ''">
                 <p>
