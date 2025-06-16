@@ -107,29 +107,29 @@
                 </div>
             </div>
             </xsl:if>
-            <details class="metadata-details">
-                    <summary>Image Metadata</summary>
-                    <table class="metadata-table">
-                        <tr><th><xsl:value-of select="$i18nexifimagemake"/></th><td><xsl:value-of select="exif/exifimagemake"/></td></tr>
-                        <tr><th><xsl:value-of select="$i18nexifimagemodel"/></th><td><xsl:value-of select="exif/exifimagemodel"/></td></tr>
-                        <tr><th><xsl:value-of select="$i18nexifimageorientation"/></th><td><xsl:value-of select="exif/exifimageorientation"/></td></tr>
-                        <tr><th><xsl:value-of select="$i18nexifimagexresolution"/></th><td><xsl:value-of select="exif/exifimagexresolution"/></td></tr>
-                        <tr><th><xsl:value-of select="$i18nexifimageyresolution"/></th><td><xsl:value-of select="exif/exifimageyresolution"/></td></tr>
-                        <tr><th><xsl:value-of select="$i18nexifimageresolutionunit"/></th><td><xsl:value-of select="exif/exifimageresolutionunit"/></td></tr>
-                        <tr><th><xsl:value-of select="$i18nexifimagedatetime"/></th><td><xsl:value-of select="exif/exifimagedatetime"/></td></tr>
-                        <tr><th><xsl:value-of select="$i18nexifimageycbcrpositioning"/></th><td><xsl:value-of select="exif/exifimageycbcrpositioning"/></td></tr>
-                        <tr><th><xsl:value-of select="$i18nexifphotoexposuretime"/></th><td><xsl:value-of select="exif/exifphotoexposuretime"/></td></tr>
-                        <tr><th><xsl:value-of select="$i18nexifphotofnumber"/></th><td><xsl:value-of select="exif/exifphotofnumber"/></td></tr>
-                        <tr><th><xsl:value-of select="$i18nexifphotoexposureprogram"/></th><td><xsl:value-of select="exif/exifphotoexposureprogram"/></td></tr>
-                        <tr><th><xsl:value-of select="$i18nexifphotoisospeedratings"/></th><td><xsl:value-of select="exif/exifphotoisospeedratings"/></td></tr>
-                        <tr><th><xsl:value-of select="$i18nexifphotoshutterspeedvalue"/></th><td><xsl:value-of select="exif/exifphotoshutterspeedvalue"/></td></tr>
-                        <tr><th><xsl:value-of select="$i18nexifphotoaperturevalue"/></th><td><xsl:value-of select="exif/exifphotoaperturevalue"/></td></tr>
-                        <tr><th><xsl:value-of select="$i18nexifphotofocallength"/></th><td><xsl:value-of select="exif/exifphotofocallength"/></td></tr>
-                        <tr><th><xsl:value-of select="$i18nexifgpsaltitude"/></th><td><xsl:value-of select="exif/exifgpsaltitude"/></td></tr>
-                        <tr><th><xsl:value-of select="$i18nexifgpslatitude"/></th><td><xsl:value-of select="exif/exifgpslatitude"/></td></tr>
-                        <tr><th><xsl:value-of select="$i18nexifgpslongitude"/></th><td><xsl:value-of select="exif/exifgpslongitude"/></td></tr>
-                    </table>
-                </details>
+            <!-- <details class="metadata-details"> -->
+            <!--         <summary>Image Metadata</summary> -->
+            <!--         <table class="metadata-table"> -->
+            <!--             <tr><th><xsl:value-of select="$i18nexifimagemake"/></th><td><xsl:value-of select="exif/exifimagemake"/></td></tr> -->
+            <!--             <tr><th><xsl:value-of select="$i18nexifimagemodel"/></th><td><xsl:value-of select="exif/exifimagemodel"/></td></tr> -->
+            <!--             <tr><th><xsl:value-of select="$i18nexifimageorientation"/></th><td><xsl:value-of select="exif/exifimageorientation"/></td></tr> -->
+            <!--             <tr><th><xsl:value-of select="$i18nexifimagexresolution"/></th><td><xsl:value-of select="exif/exifimagexresolution"/></td></tr> -->
+            <!--             <tr><th><xsl:value-of select="$i18nexifimageyresolution"/></th><td><xsl:value-of select="exif/exifimageyresolution"/></td></tr> -->
+            <!--             <tr><th><xsl:value-of select="$i18nexifimageresolutionunit"/></th><td><xsl:value-of select="exif/exifimageresolutionunit"/></td></tr> -->
+            <!--             <tr><th><xsl:value-of select="$i18nexifimagedatetime"/></th><td><xsl:value-of select="exif/exifimagedatetime"/></td></tr> -->
+            <!--             <tr><th><xsl:value-of select="$i18nexifimageycbcrpositioning"/></th><td><xsl:value-of select="exif/exifimageycbcrpositioning"/></td></tr> -->
+            <!--             <tr><th><xsl:value-of select="$i18nexifphotoexposuretime"/></th><td><xsl:value-of select="exif/exifphotoexposuretime"/></td></tr> -->
+            <!--             <tr><th><xsl:value-of select="$i18nexifphotofnumber"/></th><td><xsl:value-of select="exif/exifphotofnumber"/></td></tr> -->
+            <!--             <tr><th><xsl:value-of select="$i18nexifphotoexposureprogram"/></th><td><xsl:value-of select="exif/exifphotoexposureprogram"/></td></tr> -->
+            <!--             <tr><th><xsl:value-of select="$i18nexifphotoisospeedratings"/></th><td><xsl:value-of select="exif/exifphotoisospeedratings"/></td></tr> -->
+            <!--             <tr><th><xsl:value-of select="$i18nexifphotoshutterspeedvalue"/></th><td><xsl:value-of select="exif/exifphotoshutterspeedvalue"/></td></tr> -->
+            <!--             <tr><th><xsl:value-of select="$i18nexifphotoaperturevalue"/></th><td><xsl:value-of select="exif/exifphotoaperturevalue"/></td></tr> -->
+            <!--             <tr><th><xsl:value-of select="$i18nexifphotofocallength"/></th><td><xsl:value-of select="exif/exifphotofocallength"/></td></tr> -->
+            <!--             <tr><th><xsl:value-of select="$i18nexifgpsaltitude"/></th><td><xsl:value-of select="exif/exifgpsaltitude"/></td></tr> -->
+            <!--             <tr><th><xsl:value-of select="$i18nexifgpslatitude"/></th><td><xsl:value-of select="exif/exifgpslatitude"/></td></tr> -->
+            <!--             <tr><th><xsl:value-of select="$i18nexifgpslongitude"/></th><td><xsl:value-of select="exif/exifgpslongitude"/></td></tr> -->
+            <!--         </table> -->
+            <!--     </details> -->
             <xsl:if test="original/@fileName != ''">
                 <p>
                 <a href="{original/@fileName}"><xsl:value-of select="$i18nOriginalImage"/></a>
