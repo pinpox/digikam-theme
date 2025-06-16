@@ -123,6 +123,27 @@ h1 a:hover {
     border: 1px solid #333333;
 }
 
+.thumbnail a {
+    color: #ff9966;
+    text-decoration: none;
+}
+
+.thumbnail a:last-child {
+    margin-top: 6px;
+    display: block;
+}
+
+.thumbnail a:hover {
+    color: #ffcc99;
+}
+
+.thumbnail-text {
+    display: inline;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 2px 4px;
+    border-radius: 2px;
+}
+
 @media (max-width: 768px) {
     .thumbnail {
         width: 140px;

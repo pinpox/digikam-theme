@@ -176,7 +176,7 @@
                         <img src="{$folder}/{thumbnail/@fileName}" width="{thumbnail/@width}" height="{thumbnail/@height}" />
                     </a>
                     <a href='{$folder}/{full/@fileName}.html'>
-                        <xsl:value-of select="title"/>
+                        <span class="thumbnail-text"><xsl:value-of select="title"/></span>
                     </a>
                 </span>
                 <exsl:document href='{$folder}/{full/@fileName}.html'>
@@ -209,7 +209,7 @@
                         <img src="{fileName}/{image[1]/thumbnail/@fileName}"
                         	width="{image[1]/thumbnail/@width}"
                         	height="{image[1]/thumbnail/@height}" />
-                        <xsl:value-of select="name"/>
+                        <span class="thumbnail-text"><xsl:value-of select="name"/></span>
                     </a>
                 </span>
                 <exsl:document href="{fileName}.html">
