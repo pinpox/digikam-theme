@@ -68,7 +68,6 @@
             </xsl:choose>
 
             / <xsl:value-of select="title"/>
-            (<xsl:value-of select="position()"/>/<xsl:value-of select="last()"/>)
         </h1>
 
 
@@ -96,6 +95,9 @@
         <div class="colsx">
             <div class="image-container">
                 <img src="{full/@fileName}" />
+            </div>
+            <div class="image-number">
+                <span class="number-text">(<xsl:value-of select="position()"/>/<xsl:value-of select="last()"/>)</span>
             </div>
             <xsl:if test="string-length(description) > 0">
             <div class="image-caption">

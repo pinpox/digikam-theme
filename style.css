@@ -144,6 +144,22 @@ h1 a:hover {
     border-radius: 2px;
 }
 
+.image-number {
+    text-align: center;
+    margin-top: 8px;
+    font-family: monospace;
+    order: 2;
+}
+
+.number-text {
+    display: inline;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 2px 4px;
+    border-radius: 2px;
+    color: #ff9966;
+    font-size: 14px;
+}
+
 @media (max-width: 768px) {
     .thumbnail {
         width: 140px;
@@ -535,7 +551,7 @@ div.colsx img {
         left: unset !important;
         top: unset !important;
         display: block !important;
-        order: 2;
+        order: 3;
         z-index: auto !important;
     }
 }
@@ -602,7 +618,7 @@ div.colsx img {
         left: unset !important;
         top: unset !important;
         display: block !important;
-        order: 3;
+        order: 4;
         z-index: auto !important;
     }
 }
