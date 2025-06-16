@@ -33,6 +33,13 @@ body {
         padding: 0;
         overflow-x: hidden;
     }
+    
+    body::before {
+        content: "";
+        display: block;
+        height: 4.5em;
+        width: 100%;
+    }
 }
 
 a {
@@ -71,8 +78,8 @@ h1 {
 @media (max-width: 768px) {
     h1 {
         padding-left: 0.8em;
-        padding-top: 0.4em;
-        padding-bottom: 0.4em;
+        padding-top: 0.5em;
+        padding-bottom: 0.5em;
         padding-right: 0.8em;
         font-size: 90%;
         flex-shrink: 0;
@@ -85,7 +92,12 @@ h1 {
         width: 100%;
         box-sizing: border-box;
         margin: 0;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+        height: 3em;
+    }
+    
+    .image-container {
+        touch-action: none;
     }
 }
 
@@ -143,7 +155,7 @@ h1 a:hover {
     #content {
         margin-left: 0;
         margin-right: 0;
-        margin-top: 4em;
+        margin-top: 5em;
         overflow-y: visible;
         padding-bottom: 0.8em;
         box-sizing: border-box;
@@ -159,17 +171,52 @@ h1 a:hover {
 }
 #content img {
     border: 1px solid #222222;
-    width: 100%;
+    max-width: 100%;
     height: auto;
-    object-fit: cover;
 }
 
 #content img.fullimg, div.image-container img {
-    width: 100% !important;
-    height: auto !important;
-    object-fit: cover !important;
-    object-position: center !important;
-    max-width: none !important;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    object-position: center;
+    max-width: 100%;
+    max-height: calc(100vh - 120px);
+    box-sizing: border-box;
+    display: block;
+}
+
+@media (min-width: 769px) {
+    div.image-container img {
+        height: calc(100vh - 60px) !important;
+        width: auto !important;
+        max-width: none !important;
+        object-fit: fill;
+    }
+    
+    div.colsx {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: calc(100vh - 60px);
+        max-height: unset;
+        position: relative;
+        padding: 0;
+        margin: 0 auto;
+    }
+    
+    div.image-container {
+        height: 100%;
+        width: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+    
+    .image-container:hover .nav-arrow {
+        opacity: 0.8;
+    }
 }
 
 #collectionPage img {
@@ -192,7 +239,6 @@ h1 a:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    touch-action: none;
     -webkit-user-select: none;
     user-select: none;
     box-sizing: border-box;
@@ -200,21 +246,29 @@ h1 a:hover {
     overflow: hidden;
 }
 
+@media (min-width: 769px) {
+    .image-container {
+        margin: 0 60px;
+        width: auto;
+        position: relative;
+        padding: 10px;
+    }
+}
+
 .nav-arrow {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     font-size: 28px;
-    opacity: 0;
-    transition: opacity 0.3s ease;
+    opacity: 1;
     color: #000000;
     cursor: pointer;
-    z-index: 10;
+    z-index: 100;
     background-color: #6688aa;
     border-radius: 0;
     width: 36px;
     height: 36px;
-    display: flex;
+    display: flex !important;
     align-items: center;
     justify-content: center;
     border-left: 2px solid #aaddff;
@@ -223,13 +277,23 @@ h1 a:hover {
     border-bottom: 2px solid #112233;
     font-family: monospace;
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
-    user-select: none;
     -webkit-user-select: none;
+    user-select: none;
+    visibility: visible !important;
+}
+
+@media (min-width: 769px) {
+    .nav-arrow {
+        width: 40px;
+        height: 40px;
+        font-size: 30px;
+    }
 }
 
 @media (max-width: 768px) {
     .nav-arrow {
-        display: none;
+        display: none !important;
+        visibility: hidden !important;
     }
     
     body {
@@ -248,8 +312,10 @@ h1 a:hover {
     }
 }
 
-.image-container:hover .nav-arrow {
+.image-container .nav-arrow {
     opacity: 1;
+    display: flex !important;
+    visibility: visible !important;
 }
 
 .left-arrow {
@@ -259,6 +325,24 @@ h1 a:hover {
 .right-arrow {
     right: 15px;
 }
+
+@media (min-width: 769px) {
+    .left-arrow {
+        left: -50px !important;
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+    
+    .right-arrow {
+        right: -50px !important;
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+}
+
+
 
 .nav-arrow a {
     color: white;
@@ -286,6 +370,7 @@ h1 a:hover {
     display: flex;
     height: calc(100vh - 80px);
     justify-content: space-between;
+    box-sizing: border-box;
 }
 
 @media (max-width: 768px) {
@@ -316,8 +401,11 @@ div.colsx {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     overflow: hidden;
     padding-right: 10px;
+    box-sizing: border-box;
+    min-height: 300px;
 }
 
 @media (max-width: 768px) {
@@ -328,7 +416,7 @@ div.colsx {
         min-height: 0;
         flex: 0 0 auto;
         display: block;
-        margin: 0.8em auto;
+        margin: 1.5em auto 0.8em auto;
         -webkit-user-select: none;
         user-select: none;
         touch-action: none;
@@ -346,11 +434,10 @@ div.colsx {
 }
 
 div.colsx img {
-    max-width: 100%;
-    max-height: calc(100vh - 200px);
-    object-fit: contain;
-    height: auto;
-    width: auto;
+    max-width: none !important;
+    height: calc(100vh - 60px) !important;
+    object-fit: fill;
+    width: auto !important;
     margin: 0 auto;
     display: block;
     border-left: 2px solid #aaddff;
@@ -375,8 +462,9 @@ div.colsx img {
         user-drag: none;
         -webkit-touch-callout: none;
         display: block;
-        max-width: none !important;
-        object-position: center !important;
+        min-width: 100% !important;
+        object-position: center;
+        border-radius: 4px;
     }
 }
 
@@ -406,7 +494,7 @@ div.colsx img {
 @media (max-width: 768px) {
     .image-caption {
         width: calc(100% - 1.6em);
-        margin: 0.8em auto 0 auto;
+        margin: 1.2em auto 0 auto;
         align-self: center;
         max-height: none;
         font-size: 13px;

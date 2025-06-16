@@ -1,66 +1,35 @@
-document.addEventListener("DOMContentLoaded", function() {
-    // Debug mode can be enabled by adding #debug to the URL
-    const isDebug = window.location.hash === '#debug';
-    
-    // Simple debug logger
-    function log(message) {
-        if (isDebug) {
-            console.log(`[SwipeNav] ${message}`);
-            
-            // Create or update debug overlay
-            let debugEl = document.getElementById('swipe-debug');
-            if (!debugEl) {
-                debugEl = document.createElement('div');
-                debugEl.id = 'swipe-debug';
-                debugEl.style.position = 'fixed';
-                debugEl.style.bottom = '10px';
-                debugEl.style.right = '10px';
-                debugEl.style.backgroundColor = 'rgba(0,0,0,0.7)';
-                debugEl.style.color = 'white';
-                debugEl.style.padding = '10px';
-                debugEl.style.zIndex = '9999';
-                debugEl.style.fontFamily = 'monospace';
-                debugEl.style.fontSize = '12px';
-                debugEl.style.maxWidth = '80%';
-                document.body.appendChild(debugEl);
-            }
-            
-            // Add new message to debug overlay
-            const msgEl = document.createElement('div');
-            msgEl.textContent = message;
-            debugEl.appendChild(msgEl);
-            
-            // Only keep last 5 messages
-            while (debugEl.childNodes.length > 5) {
-                debugEl.removeChild(debugEl.firstChild);
-            }
-        }
+// Ultra-simple touch navigation script
+document.addEventListener('DOMContentLoaded', function() {
+    // Debug function - add #debug to URL to see messages
+    const debug = window.location.hash === '#debug';
+    function log(msg) {
+        if (debug) console.log('[Nav] ' + msg);
     }
-
-    log('Touch navigation script loaded');
     
-    // Navigation data from template
-    const prevUrl = window.navigationData && window.navigationData.prevUrl;
-    const nextUrl = window.navigationData && window.navigationData.nextUrl;
+    log('Navigation script loaded');
     
-    log(`Navigation data: prev=${prevUrl}, next=${nextUrl}`);
+    // Get navigation URLs
+    const prevLink = document.querySelector('.left-arrow a');
+    const nextLink = document.querySelector('.right-arrow a');
     
-    // Navigate to previous/next page
+    const prevUrl = prevLink ? prevLink.getAttribute('href') : null;
+    const nextUrl = nextLink ? nextLink.getAttribute('href') : null;
+    
+    log('Prev URL: ' + prevUrl);
+    log('Next URL: ' + nextUrl);
+    
+    // Navigation functions
     function goToPrevious() {
         if (prevUrl) {
-            log(`Navigating to previous: ${prevUrl}`);
+            log('Going to previous: ' + prevUrl);
             window.location.href = prevUrl;
-        } else {
-            log('No previous page available');
         }
     }
     
     function goToNext() {
         if (nextUrl) {
-            log(`Navigating to next: ${nextUrl}`);
+            log('Going to next: ' + nextUrl);
             window.location.href = nextUrl;
-        } else {
-            log('No next page available');
         }
     }
     
@@ -73,70 +42,50 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
     
-    // Touch variables
-    let touchStartX = 0;
-    let touchStartY = 0;
-    let touchEndX = 0;
-    let touchEndY = 0;
+    // Simple swipe detection
+    let startX, startY;
     
-    // Add swipe detection to the whole document
     document.addEventListener('touchstart', function(e) {
-        touchStartX = e.changedTouches[0].screenX;
-        touchStartY = e.changedTouches[0].screenY;
-        log(`Touch start at: ${touchStartX},${touchStartY}`);
-    }, false);
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+        log('Touch start: ' + startX + ',' + startY);
+    });
     
     document.addEventListener('touchend', function(e) {
-        touchEndX = e.changedTouches[0].screenX;
-        touchEndY = e.changedTouches[0].screenY;
+        if (!startX || !startY) return;
         
-        log(`Touch end at: ${touchEndX},${touchEndY}`);
+        let endX = e.changedTouches[0].clientX;
+        let endY = e.changedTouches[0].clientY;
+        log('Touch end: ' + endX + ',' + endY);
         
-        // Calculate swipe
-        handleSwipe();
-    }, false);
-    
-    function handleSwipe() {
-        const deltaX = touchEndX - touchStartX;
-        const deltaY = touchEndY - touchStartY;
-        const absDeltaX = Math.abs(deltaX);
-        const absDeltaY = Math.abs(deltaY);
+        let diffX = endX - startX;
+        let diffY = Math.abs(endY - startY);
         
-        log(`Swipe delta: x=${deltaX}, y=${deltaY}`);
-        
-        // Minimum distance required for a swipe
-        const minDistance = 75;
-        
-        // If horizontal swipe is dominant and exceeds minimum distance
-        if (absDeltaX > absDeltaY && absDeltaX > minDistance) {
-            // Check swipe direction
-            if (deltaX < 0) {
-                // Swipe left (next)
-                log('Detected left swipe - go to next');
-                goToNext();
-            } else {
-                // Swipe right (previous)
-                log('Detected right swipe - go to previous');
+        // If horizontal swipe is dominant and exceeds threshold
+        if (Math.abs(diffX) > 50 && Math.abs(diffX) > diffY) {
+            if (diffX > 0) {
+                // Right swipe
+                log('Right swipe detected');
                 goToPrevious();
+            } else {
+                // Left swipe
+                log('Left swipe detected');
+                goToNext();
             }
-        } else {
-            log('No valid swipe detected');
         }
-    }
-    
-    // If mobile (no hover capability), hide arrow buttons and show swipe hint
-    if (window.matchMedia('(hover: none)').matches) {
-        log('Mobile device detected - hiding arrows');
         
-        // Hide arrow buttons
-        const arrows = document.querySelectorAll('.nav-arrow');
-        arrows.forEach(arrow => {
+        // Reset values
+        startX = startY = null;
+    });
+    
+    // Hide arrows on mobile devices
+    if (window.matchMedia('(max-width: 768px)').matches) {
+        let arrows = document.querySelectorAll('.nav-arrow');
+        arrows.forEach(function(arrow) {
             arrow.style.display = 'none';
         });
-        
-        // No hint shown, just use the image container as is
-        const imgContainer = document.querySelector('.image-container');
+        log('Arrows hidden on mobile');
+    } else {
+        log('Desktop mode - showing arrows');
     }
-    
-    log('Swipe detection initialized');
 });

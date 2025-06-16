@@ -1,21 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<!--
- * ============================================================
- *
- * This file is a part of digiKam project
- * https://www.digikam.org
- *
- * Date        : 2008-06-22
- * Description : A clean look theme for the digiKam html gallery tool.
- *
- * SPDX-FileCopyrightText: 2008 by Gianluca Urgese <g dot urgese at jaone dot it>
- *
- * SPDX-License-Identifier: GPL-2.0-or-later
- *
- * ============================================================
- -->
-
 <!DOCTYPE stylesheet [<!ENTITY raquo "&#187;">]>
 
 <xsl:transform version="1.0"
@@ -101,7 +85,7 @@
                         </xsl:otherwise>
                     </xsl:choose>
                 </div>
-                <img src="{full/@fileName}" style="width:100% !important; max-width:none !important; height:auto !important; max-height:60vh !important; object-fit:cover !important; display:block !important;" />
+                <img src="{full/@fileName}" />
                 <div class="nav-arrow right-arrow">
                     <xsl:choose>
                         <xsl:when test="position() &lt; last()">
