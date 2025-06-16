@@ -1,21 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<!--
- * ============================================================
- *
- * This file is a part of digiKam project
- * https://www.digikam.org
- *
- * Date        : 2008-06-22
- * Description : A clean look theme for the digiKam html gallery tool.
- *
- * SPDX-FileCopyrightText: 2008 by Gianluca Urgese <g dot urgese at jaone dot it>
- *
- * SPDX-License-Identifier: GPL-2.0-or-later
- *
- * ============================================================
- -->
-
 <!DOCTYPE stylesheet [<!ENTITY raquo "&#187;">]>
 
 <xsl:transform version="1.0"
@@ -53,32 +37,24 @@
     <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
         <title><xsl:value-of select="../name"/> (<xsl:value-of select="position()"/>/<xsl:value-of select="last()"/>)</title>
 
         <link rel="stylesheet" type="text/css" href="../pinpox/style.css"/>
 	<xsl:call-template name="linkTagsImagePage"/>
         <script type="text/javascript">
-            document.addEventListener('keydown', function(event) {
-                if (event.key === 'ArrowLeft') {
-                    <xsl:if test="position() &gt; 1">
-                    var prevUrl = '<xsl:value-of select="preceding-sibling::image[position()=1]/full/@fileName"/>.html';
-                    window.location.href = prevUrl;
-                    </xsl:if>
-                }
-                else if (event.key === 'ArrowRight') {
-                    <xsl:if test="position() &lt; last()">
-                    var nextUrl = '<xsl:value-of select="following-sibling::image[position()=1]/full/@fileName"/>.html';
-                    window.location.href = nextUrl;
-                    </xsl:if>
-                }
-            });
+            // Define navigation URLs for the script to use
+            window.navigationData = {
+                prevUrl: '<xsl:if test="position() &gt; 1"><xsl:value-of select="preceding-sibling::image[position()=1]/full/@fileName"/>.html</xsl:if>',
+                nextUrl: '<xsl:if test="position() &lt; last()"><xsl:value-of select="following-sibling::image[position()=1]/full/@fileName"/>.html</xsl:if>'
+            };
         </script>
+        <script type="text/javascript" src="../pinpox/touch.js?v=1"></script>
     </head>
     <body id="imagePage">
 
         <h1>
-            <a href="/albums">albums</a>
+            <a href="/albums">Albums</a>
             /
             <xsl:choose>
                 <xsl:when test="count(/collections/collection) &gt; 1">
@@ -92,78 +68,76 @@
             </xsl:choose>
 
             / <xsl:value-of select="title"/>
-            (<xsl:value-of select="position()"/>/<xsl:value-of select="last()"/>)
         </h1>
 
 
     <div id="content">
+        <div class="nav-arrow left-arrow">
+            <xsl:choose>
+                <xsl:when test="position() &gt; 1">
+                    <a href="{preceding-sibling::image[position()=1]/full/@fileName}.html">&#9664;</a>
+                </xsl:when>
+                <xsl:otherwise>
+                    <span class="disabled">&#9664;</span>
+                </xsl:otherwise>
+            </xsl:choose>
+        </div>
+        <div class="nav-arrow right-arrow">
+            <xsl:choose>
+                <xsl:when test="position() &lt; last()">
+                    <a href="{following-sibling::image[position()=1]/full/@fileName}.html">&#9654;</a>
+                </xsl:when>
+                <xsl:otherwise>
+                    <span class="disabled">&#9654;</span>
+                </xsl:otherwise>
+            </xsl:choose>
+        </div>
         <div class="colsx">
             <div class="image-container">
-                <div class="nav-arrow left-arrow">
-                    <xsl:choose>
-                        <xsl:when test="position() &gt; 1">
-                            <a href="{preceding-sibling::image[position()=1]/full/@fileName}.html">&#9664;</a>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <span class="disabled">&#9664;</span>
-                        </xsl:otherwise>
-                    </xsl:choose>
-                </div>
-                <img src="{full/@fileName}" width="{full/@width}" height="{full/@height}" />
-                <div class="nav-arrow right-arrow">
-                    <xsl:choose>
-                        <xsl:when test="position() &lt; last()">
-                            <a href="{following-sibling::image[position()=1]/full/@fileName}.html">&#9654;</a>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <span class="disabled">&#9654;</span>
-                        </xsl:otherwise>
-                    </xsl:choose>
+                <img src="{full/@fileName}" />
+            </div>
+            <div class="image-number">
+                <span class="number-text">(<xsl:value-of select="position()"/>/<xsl:value-of select="last()"/>)</span>
+            </div>
+            <xsl:if test="string-length(description) > 0">
+            <div class="image-caption">
+                <div class="title-bar"><xsl:value-of select="title"/></div>
+                <div class="caption-content">
+                    <xsl:call-template name="line-breaks">
+                        <xsl:with-param name="text" select="description"/>
+                    </xsl:call-template>
                 </div>
             </div>
+            </xsl:if>
+            <!-- <details class="metadata-details"> -->
+            <!--         <summary>Image Metadata</summary> -->
+            <!--         <table class="metadata-table"> -->
+            <!--             <tr><th><xsl:value-of select="$i18nexifimagemake"/></th><td><xsl:value-of select="exif/exifimagemake"/></td></tr> -->
+            <!--             <tr><th><xsl:value-of select="$i18nexifimagemodel"/></th><td><xsl:value-of select="exif/exifimagemodel"/></td></tr> -->
+            <!--             <tr><th><xsl:value-of select="$i18nexifimageorientation"/></th><td><xsl:value-of select="exif/exifimageorientation"/></td></tr> -->
+            <!--             <tr><th><xsl:value-of select="$i18nexifimagexresolution"/></th><td><xsl:value-of select="exif/exifimagexresolution"/></td></tr> -->
+            <!--             <tr><th><xsl:value-of select="$i18nexifimageyresolution"/></th><td><xsl:value-of select="exif/exifimageyresolution"/></td></tr> -->
+            <!--             <tr><th><xsl:value-of select="$i18nexifimageresolutionunit"/></th><td><xsl:value-of select="exif/exifimageresolutionunit"/></td></tr> -->
+            <!--             <tr><th><xsl:value-of select="$i18nexifimagedatetime"/></th><td><xsl:value-of select="exif/exifimagedatetime"/></td></tr> -->
+            <!--             <tr><th><xsl:value-of select="$i18nexifimageycbcrpositioning"/></th><td><xsl:value-of select="exif/exifimageycbcrpositioning"/></td></tr> -->
+            <!--             <tr><th><xsl:value-of select="$i18nexifphotoexposuretime"/></th><td><xsl:value-of select="exif/exifphotoexposuretime"/></td></tr> -->
+            <!--             <tr><th><xsl:value-of select="$i18nexifphotofnumber"/></th><td><xsl:value-of select="exif/exifphotofnumber"/></td></tr> -->
+            <!--             <tr><th><xsl:value-of select="$i18nexifphotoexposureprogram"/></th><td><xsl:value-of select="exif/exifphotoexposureprogram"/></td></tr> -->
+            <!--             <tr><th><xsl:value-of select="$i18nexifphotoisospeedratings"/></th><td><xsl:value-of select="exif/exifphotoisospeedratings"/></td></tr> -->
+            <!--             <tr><th><xsl:value-of select="$i18nexifphotoshutterspeedvalue"/></th><td><xsl:value-of select="exif/exifphotoshutterspeedvalue"/></td></tr> -->
+            <!--             <tr><th><xsl:value-of select="$i18nexifphotoaperturevalue"/></th><td><xsl:value-of select="exif/exifphotoaperturevalue"/></td></tr> -->
+            <!--             <tr><th><xsl:value-of select="$i18nexifphotofocallength"/></th><td><xsl:value-of select="exif/exifphotofocallength"/></td></tr> -->
+            <!--             <tr><th><xsl:value-of select="$i18nexifgpsaltitude"/></th><td><xsl:value-of select="exif/exifgpsaltitude"/></td></tr> -->
+            <!--             <tr><th><xsl:value-of select="$i18nexifgpslatitude"/></th><td><xsl:value-of select="exif/exifgpslatitude"/></td></tr> -->
+            <!--             <tr><th><xsl:value-of select="$i18nexifgpslongitude"/></th><td><xsl:value-of select="exif/exifgpslongitude"/></td></tr> -->
+            <!--         </table> -->
+            <!--     </details> -->
             <xsl:if test="original/@fileName != ''">
                 <p>
                 <a href="{original/@fileName}"><xsl:value-of select="$i18nOriginalImage"/></a>
                 (<xsl:value-of select="original/@width"/>x<xsl:value-of select="original/@height"/>)
                 </p>
             </xsl:if>
-        </div>
-        <div class="sidebar">
-        <xsl:if test="string-length(description) > 0">
-        <div class="image-caption">
-            <div class="title-bar"><xsl:value-of select="title"/></div>
-            <div class="caption-content">
-                <xsl:call-template name="line-breaks">
-                    <xsl:with-param name="text" select="description"/>
-                </xsl:call-template>
-            </div>
-        </div>
-        </xsl:if>
-            
-            
-        <details class="metadata-details">
-                <summary>Image Metadata</summary>
-                <table class="metadata-table">
-                    <tr><th><xsl:value-of select="$i18nexifimagemake"/></th><td><xsl:value-of select="exif/exifimagemake"/></td></tr>
-                    <tr><th><xsl:value-of select="$i18nexifimagemodel"/></th><td><xsl:value-of select="exif/exifimagemodel"/></td></tr>
-                    <tr><th><xsl:value-of select="$i18nexifimageorientation"/></th><td><xsl:value-of select="exif/exifimageorientation"/></td></tr>
-                    <tr><th><xsl:value-of select="$i18nexifimagexresolution"/></th><td><xsl:value-of select="exif/exifimagexresolution"/></td></tr>
-                    <tr><th><xsl:value-of select="$i18nexifimageyresolution"/></th><td><xsl:value-of select="exif/exifimageyresolution"/></td></tr>
-                    <tr><th><xsl:value-of select="$i18nexifimageresolutionunit"/></th><td><xsl:value-of select="exif/exifimageresolutionunit"/></td></tr>
-                    <tr><th><xsl:value-of select="$i18nexifimagedatetime"/></th><td><xsl:value-of select="exif/exifimagedatetime"/></td></tr>
-                    <tr><th><xsl:value-of select="$i18nexifimageycbcrpositioning"/></th><td><xsl:value-of select="exif/exifimageycbcrpositioning"/></td></tr>
-                    <tr><th><xsl:value-of select="$i18nexifphotoexposuretime"/></th><td><xsl:value-of select="exif/exifphotoexposuretime"/></td></tr>
-                    <tr><th><xsl:value-of select="$i18nexifphotofnumber"/></th><td><xsl:value-of select="exif/exifphotofnumber"/></td></tr>
-                    <tr><th><xsl:value-of select="$i18nexifphotoexposureprogram"/></th><td><xsl:value-of select="exif/exifphotoexposureprogram"/></td></tr>
-                    <tr><th><xsl:value-of select="$i18nexifphotoisospeedratings"/></th><td><xsl:value-of select="exif/exifphotoisospeedratings"/></td></tr>
-                    <tr><th><xsl:value-of select="$i18nexifphotoshutterspeedvalue"/></th><td><xsl:value-of select="exif/exifphotoshutterspeedvalue"/></td></tr>
-                    <tr><th><xsl:value-of select="$i18nexifphotoaperturevalue"/></th><td><xsl:value-of select="exif/exifphotoaperturevalue"/></td></tr>
-                    <tr><th><xsl:value-of select="$i18nexifphotofocallength"/></th><td><xsl:value-of select="exif/exifphotofocallength"/></td></tr>
-                    <tr><th><xsl:value-of select="$i18nexifgpsaltitude"/></th><td><xsl:value-of select="exif/exifgpsaltitude"/></td></tr>
-                    <tr><th><xsl:value-of select="$i18nexifgpslatitude"/></th><td><xsl:value-of select="exif/exifgpslatitude"/></td></tr>
-                    <tr><th><xsl:value-of select="$i18nexifgpslongitude"/></th><td><xsl:value-of select="exif/exifgpslongitude"/></td></tr>
-                </table>
-            </details>
         </div>
     </div>
     </body>
@@ -179,7 +153,10 @@
         <title><xsl:value-of select="name"/></title>
 
         <link rel="stylesheet" type="text/css" href="pinpox/style.css"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta name="mobile-web-app-capable" content="yes"/>
 	<xsl:call-template name="linkTagsCollectionPage"/>
+        <script type="text/javascript" src="pinpox/touch.js?v=1"></script>
     </head>
     <body id="collectionPage">
     <h1>
@@ -199,14 +176,14 @@
                         <img src="{$folder}/{thumbnail/@fileName}" width="{thumbnail/@width}" height="{thumbnail/@height}" />
                     </a>
                     <a href='{$folder}/{full/@fileName}.html'>
-                        <xsl:value-of select="title"/>
+                        <span class="thumbnail-text"><xsl:value-of select="title"/></span>
                     </a>
                 </span>
                 <exsl:document href='{$folder}/{full/@fileName}.html'>
                     <xsl:call-template name="imagePage"/>
                 </exsl:document>
             </xsl:for-each>
-    </div> <!-- /content -->
+    </div>
     </body>
     </html>
 </xsl:template>
@@ -232,7 +209,7 @@
                         <img src="{fileName}/{image[1]/thumbnail/@fileName}"
                         	width="{image[1]/thumbnail/@width}"
                         	height="{image[1]/thumbnail/@height}" />
-                        <xsl:value-of select="name"/>
+                        <span class="thumbnail-text"><xsl:value-of select="name"/></span>
                     </a>
                 </span>
                 <exsl:document href="{fileName}.html">
